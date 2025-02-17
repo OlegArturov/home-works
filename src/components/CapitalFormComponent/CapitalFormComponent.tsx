@@ -3,7 +3,7 @@ import useCapitalForm from "../../hooks/Countries/useCapitalForm";
 import PageTitle from "../PageTitle/PageTitle";
 import { useTranslation } from "react-i18next";
 import Select from "../Select/Select";
-import Button from "../Button/Button";
+import NavigateButton from "../NavigateButton/NavigateButton";
 
 export default function CapitalFormComponent() {
   const { t } = useTranslation("base_translations", {
@@ -14,9 +14,9 @@ export default function CapitalFormComponent() {
     valuesForCapitalSelect,
     valuesForTranslationSelect,
     selectedCountryName,
+    submitFormButtonPath,
     updateSelectedCapital,
     updateSelectedTranslation,
-    handleSubmitButtonClick,
   } = useCapitalForm();
 
   return (
@@ -43,13 +43,11 @@ export default function CapitalFormComponent() {
       />
 
       {selectedCountryName && (
-        <Button
+        <NavigateButton
+          to={submitFormButtonPath}
           label={t("submitButtonText", { countryName: selectedCountryName })}
-          onClick={handleSubmitButtonClick}
-          type="button"
-          color="primary"
-          sx={{ mt: "15px" }}
           isFullWidth
+          sx={{ mt: "15px" }}
         />
       )}
     </React.Fragment>

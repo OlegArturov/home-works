@@ -3,15 +3,13 @@ import PresentationBlock from "../../components/PresentationBlock/PresentationBl
 import PageTitle from "../../components/PageTitle/PageTitle";
 import CountryInfoBlock from "./components/CountryInfoBlock/CountryInfoBlock";
 import useCountry from "../../hooks/Countries/useCountry";
-import Button from "../../components/Button/Button";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import NavigateButton from "../../components/NavigateButton/NavigateButton";
 
 export default function Country() {
   const { t } = useTranslation("base_translations", {
     keyPrefix: "pages.country",
   });
-  const navigate = useNavigate();
   const {
     countriesState,
     translationFromSearchParams,
@@ -40,14 +38,10 @@ export default function Country() {
           />
         </PresentationBlock>
       )}
-      <Button
-        color="primary"
+      <NavigateButton
+        to={"/countries"}
         label={t("backToCountriesBtnText")}
-        type="button"
         sx={{ mt: "15px" }}
-        onClick={() => {
-          navigate("/countries");
-        }}
       />
     </Box>
   );

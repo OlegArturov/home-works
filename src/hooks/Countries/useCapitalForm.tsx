@@ -1,11 +1,10 @@
 import { useContext, useMemo } from "react";
 import { ISelectOption } from "../../components/Select/SelectTypes";
 import CountriesContext from "../../contexts/CountriesContext";
-import { useNavigate } from "react-router-dom";
+import { To } from "react-router-dom";
 import { IGetCountriesResponseCountryItem } from "../../store/services/models/countries";
 
 export default function useCapitalForm() {
-  const navigate = useNavigate();
   const { countriesState, updateSelectedCapital, updateSelectedTranslation } =
     useContext(CountriesContext);
 
@@ -41,23 +40,23 @@ export default function useCapitalForm() {
       : "";
   }, [selectedCountry, countriesState?.selectedTranslation]);
 
-  const handleSubmitButtonClick = () => {
+  const submitFormButtonPath: To = useMemo(() => {
     const searchParams = new URLSearchParams({
       translation: countriesState!.selectedTranslation!,
     }).toString();
-    navigate({
+    return {
       pathname: `/countries/${selectedCountryName}`,
       search: `?${searchParams}`,
-    });
-  };
+    };
+  }, [selectedCountryName, countriesState?.selectedTranslation]);
 
   return {
     countriesState,
     valuesForCapitalSelect,
     valuesForTranslationSelect,
     selectedCountryName,
+    submitFormButtonPath,
     updateSelectedCapital,
     updateSelectedTranslation,
-    handleSubmitButtonClick,
   };
 }
