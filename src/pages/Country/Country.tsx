@@ -22,7 +22,7 @@ export default function Country() {
 
   return (
     <Box>
-      {!isCountriesLoading && (
+      {!isCountriesLoading && countriesState?.selectedCountryToDisplay && (
         <PresentationBlock>
           <PageTitle
             text={

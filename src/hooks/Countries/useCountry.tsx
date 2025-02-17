@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import CountriesContext from "../../contexts/CountriesContext";
 import { useParams, useSearchParams } from "react-router-dom";
 import { IGetCountriesResponseCountryItem } from "../../store/services/models/countries";
@@ -13,9 +13,11 @@ export default function useCountry() {
     setCountryForDisplay,
     deleteCountry,
   } = useContext(CountriesContext);
+
   const [searchParams] = useSearchParams();
-  const { country: countryNameFromParams } = useParams();
   const translationFromSearchParams = searchParams.get("translation");
+
+  const { country: countryNameFromParams } = useParams();
 
   useEffect(() => {
     if (countryNameFromParams && countriesState?.countries.length) {
@@ -27,9 +29,12 @@ export default function useCountry() {
             : country.name.official === countryNameFromParams
         );
 
-      setCountryForDisplay!(selectedCountry!);
-      updateSelectedCapital!(selectedCountry!.id);
-      updateSelectedTranslation!(translationFromSearchParams);
+      setCountryForDisplay!(selectedCountry || null);
+
+      if (selectedCountry) {
+        updateSelectedCapital!(selectedCountry.id);
+        updateSelectedTranslation!(translationFromSearchParams);
+      }
     }
   }, [
     countryNameFromParams,

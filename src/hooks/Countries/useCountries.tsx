@@ -44,19 +44,21 @@ export default function useCountries() {
     }
   }, [countries]);
 
-  const updateSelectedCapital = (newCapitalId: string) => {
+  const updateSelectedCapital = (newCapitalId: string | null) => {
     countriesDisplatch(
       actionCreator(CountriesActionTypes.SET_CAPITAL, newCapitalId)
     );
   };
 
-  const updateSelectedTranslation = (newTranslation: string) => {
+  const updateSelectedTranslation = (newTranslation: string | null) => {
     countriesDisplatch(
       actionCreator(CountriesActionTypes.SET_TRANSLATION, newTranslation)
     );
   };
 
-  const setCountryForDisplay = (country: IGetCountriesResponseCountryItem) => {
+  const setCountryForDisplay = (
+    country: IGetCountriesResponseCountryItem | null
+  ) => {
     countriesDisplatch(
       actionCreator(CountriesActionTypes.SET_COUNTRY_FOR_DISPLAY, country)
     );

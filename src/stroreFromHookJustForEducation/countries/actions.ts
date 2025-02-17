@@ -13,11 +13,11 @@ export type CountriesActions =
       type: CountriesActionTypes.SET_COUNTRIES;
       payload: IGetCountriesResponseCountryItem[];
     }
-  | { type: CountriesActionTypes.SET_CAPITAL; payload: string }
-  | { type: CountriesActionTypes.SET_TRANSLATION; payload: string }
+  | { type: CountriesActionTypes.SET_CAPITAL; payload: string | null }
+  | { type: CountriesActionTypes.SET_TRANSLATION; payload: string | null }
   | {
       type: CountriesActionTypes.SET_COUNTRY_FOR_DISPLAY;
-      payload: IGetCountriesResponseCountryItem;
+      payload: IGetCountriesResponseCountryItem | null;
     }
   | {
       type: CountriesActionTypes.DELETE_COUNTRY;

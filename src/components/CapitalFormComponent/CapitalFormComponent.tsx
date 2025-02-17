@@ -12,10 +12,10 @@ export default function CapitalFormComponent() {
   const {
     countriesState,
     valuesForCapitalSelect,
-    updateSelectedCapital,
     valuesForTranslationSelect,
-    updateSelectedTranslation,
     selectedCountryName,
+    updateSelectedCapital,
+    updateSelectedTranslation,
     handleSubmitButtonClick,
   } = useCapitalForm();
 

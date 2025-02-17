@@ -2,12 +2,12 @@ import { createContext } from "react";
 import { ICountriesInitialState } from "../stroreFromHookJustForEducation/countries/reducer";
 import { IGetCountriesResponseCountryItem } from "../store/services/models/countries";
 
-export type IUpdateSelectedCapital = (newCapitalId: string) => void;
+export type IUpdateSelectedCapital = (newCapitalId: string | null) => void;
 export type IUpdateSelectedTranslation = (
   newTranslation: string | null
 ) => void;
 export type ISetCoutryForDisplay = (
-  country: IGetCountriesResponseCountryItem
+  country: IGetCountriesResponseCountryItem | null
 ) => void;
 export type IDeleteCountry = (countryId: string) => void;
 

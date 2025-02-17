@@ -16,15 +16,37 @@ const countriesInitialState: ICountriesInitialState = {
 };
 
 const updateTranslationValueOnCapitalChange = (
-  newCapitalId: string,
-  countries: IGetCountriesResponseCountryItem[]
+  newCapitalId: string | null,
+  state: ICountriesInitialState
 ) => {
-  const selectedCountryInfo = countries.find(
+  const selectedCountryInfo = state.countries.find(
     (country) => country.id === newCapitalId
   );
-  return newCapitalId
-    ? Object.keys(selectedCountryInfo!.translations)[0]
-    : null;
+  return newCapitalId && selectedCountryInfo
+    ? Object.keys(selectedCountryInfo.translations)[0]
+    : state.selectedTranslation;
+};
+
+const updateTranslationOnCountryRemove = (
+  countryIdForRemove: string,
+  state: ICountriesInitialState
+) => {
+  const updatedCountries = removeCountryFromList(
+    countryIdForRemove,
+    state.countries
+  );
+  return countryIdForRemove === state.selectedCapital
+    ? Object.keys(updatedCountries[0].translations)[0]
+    : state.selectedTranslation;
+};
+
+const updateSelectedCapitalOnCountryRemove = (
+  countryIdForRemove: string,
+  state: ICountriesInitialState
+) => {
+  return countryIdForRemove === state?.selectedCapital
+    ? removeCountryFromList(countryIdForRemove, state.countries)[0]?.id
+    : state.selectedCapital;
 };
 
 const removeCountryFromList = (
@@ -50,7 +72,7 @@ const reducer = (
         selectedCapital: payload,
         selectedTranslation: updateTranslationValueOnCapitalChange(
           payload,
-          state.countries
+          state
         ),
       };
     case CountriesActionTypes.SET_TRANSLATION:
@@ -65,17 +87,8 @@ const reducer = (
             ? null
             : state.selectedCountryToDisplay,
         countries: removeCountryFromList(payload, state.countries),
-        selectedCapital:
-          payload === state?.selectedCapital
-            ? removeCountryFromList(payload, state.countries)[0]?.id
-            : state.selectedCapital,
-        selectedTranslation:
-          payload === state?.selectedCapital
-            ? updateTranslationValueOnCapitalChange(
-                removeCountryFromList(payload, state.countries)[0]?.id,
-                removeCountryFromList(payload, state.countries)
-              )
-            : state.selectedTranslation,
+        selectedCapital: updateSelectedCapitalOnCountryRemove(payload, state),
+        selectedTranslation: updateTranslationOnCountryRemove(payload, state),
       };
     default:
       return state;

@@ -20,7 +20,7 @@ export default function useCapitalForm() {
   const valuesForCapitalSelect: ISelectOption[] = useMemo(
     () =>
       countriesState?.countries.map((country) => ({
-        label: <span>{country.flag + " " + country.capital[0]}</span>,
+        label: country.flag + " " + country.capital[0],
         value: country.id,
       })) || [],
     [countriesState?.countries]
@@ -54,10 +54,10 @@ export default function useCapitalForm() {
   return {
     countriesState,
     valuesForCapitalSelect,
-    updateSelectedCapital,
     valuesForTranslationSelect,
-    updateSelectedTranslation,
     selectedCountryName,
+    updateSelectedCapital,
+    updateSelectedTranslation,
     handleSubmitButtonClick,
   };
 }

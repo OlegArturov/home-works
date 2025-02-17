@@ -1,5 +1,4 @@
 import { Box, SxProps } from "@mui/material";
-import React from "react";
 import { ICountryInfoBlockProps } from "./types";
 import Button from "../../../../components/Button/Button";
 import { useTranslation } from "react-i18next";
