@@ -20,13 +20,13 @@ const persistTodoConfig = {
   storage: storage,
 };
 
-const persistedComonReducer = persistReducer(persistTodoConfig, commonSlice);
+const persistedCommonReducer = persistReducer(persistTodoConfig, commonSlice);
 
 const middlewareList: Middleware[] = [api.middleware];
 
 export const store = configureStore({
   reducer: {
-    commonSlice: persistedComonReducer,
+    commonSlice: persistedCommonReducer,
     [api.reducerPath]: api.reducer,
   },
   middleware: (getDefaultMiddleware) =>

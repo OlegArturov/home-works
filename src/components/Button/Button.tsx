@@ -1,4 +1,3 @@
-import React from "react";
 import { Button as ButtonMUI } from "@mui/material";
 import { IButtonProps } from "./ButtonTypes";
 

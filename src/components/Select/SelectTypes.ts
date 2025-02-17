@@ -1,7 +1,7 @@
 import { DefaultTFuncReturn } from "i18next";
 
 export interface ISelectOption {
-  label: string;
+  label: string | React.JSX.Element;
   value: string | number;
 }
 
